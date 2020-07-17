@@ -8,3 +8,4 @@
 out
 gen
 /src/test/java/com/ifchange/flink/test/*
+logs
