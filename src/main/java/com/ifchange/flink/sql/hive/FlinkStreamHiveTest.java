@@ -101,7 +101,7 @@ public class FlinkStreamHiveTest {
 
         tableEnv.executeSql(sql);
 
-        env.execute("flink-stream-hive-test");
+//        env.execute("flink-stream-hive-test");
 
     }
 }
