@@ -11,6 +11,8 @@ import org.apache.flink.table.api.bridge.java.StreamTableEnvironment;
 import org.apache.flink.types.Row;
 import org.apache.flink.util.Collector;
 
+import static org.apache.flink.table.api.Expressions.$;
+
 /**
  * flink sql
  * 维表join demo
@@ -102,7 +104,8 @@ public class FlinkSqlDimJoinDemo {
                 }
             }).returns(Types.ROW(Types.STRING, Types.LONG));
         //给Table增加proctime字段，ts可以随便改成别的你喜欢的名字
-        Table table = tEnv.fromDataStream(ds, "behavior,count_unique_user,ts.proctime");
+//        Table table = tEnv.fromDataStream(ds, "behavior,count_unique_user,ts.proctime");
+        Table table = tEnv.fromDataStream(ds, $("behavior"),$("count_unique_user"));
         //建立视图，保留临时表
         tEnv.createTemporaryView("group_by_view", table);
         //pv，buy，cart...等行为对应的英文名，我们通过维表Join的方式，替换为中文名
