@@ -14,13 +14,21 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <slf4j.version>1.7.25</slf4j.version>
         <logback.version>1.2.3</logback.version>
-        <flink.version>1.11.0</flink.version>
+        <flink.version>1.11.1</flink.version>
         <hive.version>2.3.5</hive.version>
         <flink-shaded-hadoop.version>2.6.5-10.0</flink-shaded-hadoop.version>
     </properties>
 
 
+
     <dependencies>
+
+        <dependency>
+            <groupId>org.apache.zeppelin</groupId>
+            <artifactId>flink1.10-shims</artifactId>
+            <version>0.9.0-preview2</version>
+        </dependency>
+
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-streaming-java_2.11</artifactId>
@@ -40,6 +48,15 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-connector-jdbc -->
+        <!--1.11后叫flink-connector-jdbc，1.11之前叫 flink-jdbc -->
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-connector-jdbc_2.11</artifactId>
+            <version>1.11.1</version>
+        </dependency>
+
 
         <dependency>
             <groupId>org.apache.flink</groupId>
@@ -80,6 +97,19 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-table-api-scala_2.11</artifactId>
+            <version>1.11.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-table-api-scala-bridge_2.11</artifactId>
+            <version>1.10.0</version>
+        </dependency>
+
 
         <dependency>
             <groupId>org.apache.flink</groupId>
@@ -300,6 +330,18 @@
             <version>${slf4j.version}</version>
         </dependency>
 
+      <!--  <dependency>
+            <groupId>com.alibaba.ververica</groupId>
+            <artifactId>flink-connector-mysql-cdc</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba.ververica</groupId>
+            <artifactId>flink-connector-postgres-cdc</artifactId>
+            <version>1.0.0</version>
+        </dependency>-->
+
     </dependencies>
 
     <build>
@@ -363,7 +405,7 @@
                             <transformers>
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>com.ifchange.flink.sql.hive.FlinkStreamHiveTest
+                                    <mainClass>com.ifchange.flink.sql.company.portrait.FlinkSyncDataToHive
                                     </mainClass>
                                 </transformer>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
