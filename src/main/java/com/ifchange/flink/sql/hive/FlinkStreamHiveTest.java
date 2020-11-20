@@ -42,7 +42,9 @@ public class FlinkStreamHiveTest {
         "  'partition.time-extractor.timestamp-pattern'='$dt $hr:minut:00',\n" +
         "  'sink.partition-commit.trigger'='process-time',\n" +
 //        "  'sink.partition-commit.delay'='5 min',\n" +
-        "  'sink.partition-commit.policy.kind'='metastore,success-file'\n" +
+        "  'sink.partition-commit.policy.kind'='metastore,success-file,custom'\n" +
+        //自定义合并策略
+        "'sink.partition-commit.policy.class'='com.ifchange.flink.sql.hive.ParquetFileMergingCommitPolicy'"+
         ")";
 
     public static void main(String[] args) throws Exception {
@@ -64,6 +66,8 @@ public class FlinkStreamHiveTest {
         tableEnv.registerCatalog("myhive", hive);
         // set the HiveCatalog as the current catalog of the session
         tableEnv.useCatalog("myhive");
+
+//        tableEnv.createTemporarySystemFunction();
 
         try {
             TableResult tableResult = tableEnv.executeSql(kafkaSql);
