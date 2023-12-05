@@ -13,7 +13,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <slf4j.version>1.7.25</slf4j.version>
-        <logback.version>1.2.3</logback.version>
+        <logback.version>1.2.13</logback.version>
         <flink.version>1.11.1</flink.version>
         <hive.version>2.3.5</hive.version>
         <flink-shaded-hadoop.version>2.6.5-10.0</flink-shaded-hadoop.version>
